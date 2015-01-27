@@ -15,7 +15,7 @@ title = "Drone Named a Rookie of the Year with 100+ Contributors"
 
 ![open_source_rookie_of_the_year](/images/Rookie_Award_2014_HM.png)
 
-Today, Black Duck Software [announced](https://www.blackducksoftware.com/open-source-rookies) their annual Open Source Rookie of the Year awards. We’re very excited that [Drone](https://github.com/drone/drone) was awarded honorable mention. This award recognizes the top new open source projects of the past year and really highlights the strenght of the container ecosystem. Fellow recipients include [Kubernetes](https://github.com/googlecloudplatform/kubernetes), [cAdvisor](https://github.com/google/cadvisor) and [Fig](https://github.com/docker/fig). [Docker](https://github.com/docker/docker) was an award winner last year.
+Today, Black Duck Software [announced](https://www.blackducksoftware.com/open-source-rookies) their annual Open Source Rookie of the Year awards. We’re very excited that [Drone](https://github.com/drone/drone) was awarded honorable mention. This award recognizes the top new open source projects of the past year and really highlights the strength of the container ecosystem. Fellow recipients include [Kubernetes](https://github.com/googlecloudplatform/kubernetes), [cAdvisor](https://github.com/google/cadvisor) and [Fig](https://github.com/docker/fig). [Docker](https://github.com/docker/docker) was an award winner last year.
 
 Today's recognition is a reflection of the Drone community. This week we reached **100 contributors**. To date we've processed nearly **400 pull requests**. Drone is being used by startups, tech giants, and large corporations alike. This is a great way to kickoff what is sure to be an exciting year!
 
