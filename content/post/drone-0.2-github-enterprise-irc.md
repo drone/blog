@@ -86,7 +86,7 @@ You can find the project at [github.com/drone/drone-wall](https://github.com/dro
 
 ## Give it a Try!
 
-We invite you to [download and install](http://drone.readthedocs.org/en/latest/install.html)
+We invite you to [download and install](http://readme.drone.io/setup/install/ubuntu/)
 Drone and give it a try. We'd love to hear what you think and we're eager to
 improve the platform with the help of the open source community.
 
