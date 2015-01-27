@@ -15,7 +15,7 @@ While we haven't officially cut a 0.3 release, it is already heavily used in pro
 
 ## Improved Design
 
-The user and repository dashboards are updated to use a card-based layout. This layout attempts to surface the most relevant repositories and commits so that you don't have to visually parse long lists. If you are clicking around in Drone you are most likely responding to a build failure -- failed builds are therefore styled to immediately capture your attention:
+The user and repository dashboards use card-based layouts. These layouts attempt to surface the most relevant repositories and commits so that you don't have to scroll through long lists. Failed builds are further styled to capture your attention so you can quickly find and fix issues.
 
 ![Build Status](/images/drone_0.3_commit_list.png) 
 
