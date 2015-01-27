@@ -7,6 +7,7 @@ title = "Drone and Docker, Open Source CI"
   name = "Brad Rydzewski"
   link = "https://twitter.com/bradrydzewski"
   photo = "https://pbs.twimg.com/profile_images/3253271781/90284722f819b80f92b5fd93a07ee109_400x400.jpeg"
+
 +++
 
 Today I'm excited to announce a new open source continuous integration server, written in Go and built on top of Docker. We call it project Drone. You can find the repository on GitHub at [github.com/drone/drone](https://github.com/drone/drone)

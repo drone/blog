@@ -7,6 +7,10 @@ title = "Drone Named a Rookie of the Year with 100+ Contributors"
   name = "Brad Rydzewski"
   link = "https://twitter.com/bradrydzewski"
   photo = "https://pbs.twimg.com/profile_images/3253271781/90284722f819b80f92b5fd93a07ee109_400x400.jpeg"
+
+[twitter]
+  image = "/images/Rookie_Award_2014_HM.png"
+  author = "@bradrydzewski"
 +++
 
 ![open_source_rookie_of_the_year](/images/Rookie_Award_2014_HM.png)
