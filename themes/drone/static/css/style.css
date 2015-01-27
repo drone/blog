@@ -235,3 +235,10 @@ code {
 		bottom: 0;
 	}
 }
+
+/* CUSTOM STYLES */
+
+img[alt="open_source_rookie_of_the_year"] {
+	float: right;
+	margin-left: 30px;
+}

@@ -1,12 +1,34 @@
 {{ template "theme/partials/header.html" . }}
 
 			<div class="posts">
-				<h1 class="content-subhead">Recent Posts</h1>
+				<h1 class="content-subhead">Latest Post</h1>
 
-				{{ range first 10 .Data.Pages }}
+				{{ range $i, $e := first 1 .Data.Pages }}
+				{{ if eq 0 $i }}
 				<section class="post">
 					<header class="post-header">
-							<img class="post-avatar" alt="Tilo Mitra&#x27;s avatar" height="48" width="48" src="{{ .Params.author.photo }}">
+							<img class="post-avatar" height="48" width="48" src="{{ .Params.author.photo }}">
+							<h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+
+							<p class="post-meta">
+							By <a href="{{ .Params.author.link }}" class="post-author">{{ .Params.author.name }}</a>
+							</p>
+					</header>
+
+					<div class="post-description post-content">
+						<p>{{ .Content }}</p>
+					</div>
+				</section>
+				{{ end }}
+				{{ end }}
+
+				<h1 class="content-subhead">Recent Posts</h1>
+
+				{{ range $i, $e := first 10 .Data.Pages }}
+				{{ if ne 0 $i }}
+				<section class="post">
+					<header class="post-header">
+							<img class="post-avatar" height="48" width="48" src="{{ .Params.author.photo }}">
 							<h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
 
 							<p class="post-meta">
@@ -15,9 +37,13 @@
 					</header>
 
 					<div class="post-description">
-						<p>{{ .Summary }}</p>
+						<p>
+							{{ .Summary }}
+							<a href="{{ .Permalink }}">Read More »</a>
+						</p>
 					</div>
 				</section>
+				{{ end }}
 				{{ end }}
 			</div>
 

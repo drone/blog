@@ -6,5 +6,5 @@ title = "Blog"
   description = "updates from the drone community"
   author = "Brad Rydzewski"
 
-DisableRSS = true
+DisableRSS = false
 DisableSitemap = true
