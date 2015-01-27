@@ -1,0 +1,23 @@
+{{ template "theme/partials/header.html" . }}
+
+			<div class="posts">
+				<h1 class="content-subhead">Posted on {{ .Date.Format "Mon Jan 2, 2006" }}</h1>
+
+				<section class="post">
+					<header class="post-header">
+							<img class="post-avatar" alt="Tilo Mitra&#x27;s avatar" height="48" width="48" src="{{ .Params.author.photo }}">
+							<h2 class="post-title">{{ .Title }}</h2>
+
+							<p class="post-meta">
+							By <a href="{{ .Params.author.link }}" class="post-author">{{ .Params.author.name }}</a>
+							</p>
+					</header>
+
+					<div class="post-description post-content">
+						<p>{{ .Content }}</p>
+					</div>
+				</section>
+			</div>
+
+
+{{ template "theme/partials/footer.html" . }}

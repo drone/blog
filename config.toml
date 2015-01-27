@@ -1,0 +1,10 @@
+baseurl = "http://blog.drone.io"
+languageCode = "en-us"
+title = "Blog"
+
+[params]
+  description = "updates from the drone community"
+  author = "Brad Rydzewski"
+
+DisableRSS = true
+DisableSitemap = true
