@@ -9,29 +9,29 @@ title = "Drone 0.3: Gitlab, Bitbucket, Slack and more"
   photo = "https://pbs.twimg.com/profile_images/3253271781/90284722f819b80f92b5fd93a07ee109_400x400.jpeg"
 +++
 
-I wanted to take the opportunity to providate an progress update for the 0.3 release. This release includes a lot of fundamental changes to the Drone architecture based on feedback and real world usage of the tool. While it has slowed down our release cycle a bit, I really believe we are building a strong foundation for the project.
+I wanted to provide a quick progress update for the 0.3 release. This release includes a lot of fundamental changes to the Drone architecture based on feedback and real world usage of the tool. It is **not** backwards compatible. This has slowed down our release cycle a bit, however, it has given us a chance to focus on building a strong foundation for future releases.
 
-While we haven't officially cut a 0.3 release, it is already being heavily used in production by some really great teams. Feel free to grab the latest snapshot from master and give it a try. Here are some of the great features that are waiting for you:
+While we haven't officially cut a 0.3 release, it is already heavily used in production by some really great teams. Feel free to grab the latest snapshot from master and give it a try. Here are some of the great features that are waiting for you:
 
 ## Improved Design
 
-The user and repository dashboards were updated to a card-based layout. This layout attempts to surface the most relevant repositories and commits so that you don't have to visually parse a long list. If you are logging into Drone you are most likely responding to a failure -- failed builds are therefore styled to immediately capture your attention:
+The user and repository dashboards are updated to use a card-based layout. This layout attempts to surface the most relevant repositories and commits so that you don't have to visually parse long lists. If you are clicking around in Drone you are most likely responding to a build failure -- failed builds are therefore styled to immediately capture your attention:
 
 ![Build Status](/images/drone_0.3_commit_list.png) 
 
-The commit detail is now full screen and optimized for auto-scrolling. The commit information is affixed while your browser automatically scrolls with the streaming output, and links back to the original commit (or pull request) in GitHub.
+The build result page is optimized for tailing logs and auto-scrolling. The commit information also links back to GitHub so you can easily jump into the code and see what changed:
 
 ![Build Status](/images/drone_0.3_commit.png)
 
-This is the third major iteration of the user interface and yet we still have a lot to learn about how people use this software. You can expect a lot of changes (and improvements) over the next few months as we continue to gather feedback and optimize the user experience.
+This is the third major iteration of the user interface and we still have a lot to learn about how people use this software. You can expect a lot of changes (and improvements) over the next few months as we continue to gather feedback and optimize the user experience.
 
 ## Delegated Authentication
 
-Remember how in 0.2 you had to create an account with your email address and password? And how you had to invite your colleagues via email to create accounts? Well, things just got much easier. Drone now uses your native GitHub account, GitHub login, and GitHub permissions.
+Remember how in 0.2 you created an account with your email address and password? And how you invited your colleagues via email to create accounts? Well, things just got much easier. Drone now uses your native GitHub account, GitHub login, GitHub orgs and GitHub permissions.
 
 ## Flexible Configuration
 
-Remember how in 0.2 you could manage all Drone configuration from the website? This made for an awesome demo, however, it turns out the approach doesn't scale too well. We found that Drone requires a good amount of customization and configuration to meet the diverse needs of the developer community. These needs are best expressed in a configuration file.
+Remember how in 0.2 you managed all Drone configuration from the website? This made for an awesome demo, however, it turns out the approach doesn't scale too well. We found that Drone requires a good amount of customization and configuration to meet the diverse needs of the developer community. These needs are best expressed in a configuration file.
 
 ## GitLab Support
 
