@@ -285,3 +285,10 @@ img[alt="open_source_rookie_of_the_year"] {
 	right: 0;
 }
 
+
+@media (max-width: 48em) {
+	.github-fork-ribbon {
+		background-color: #424242;
+		box-shadow:none;
+	}
+}
