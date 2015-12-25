@@ -12,12 +12,14 @@
 	<link rel="stylesheet" href="/css/style.css">
 {{ if .Params.twitter }}
 	<meta name="twitter:card" content="summary_large_image"/>
-	<meta name="twitter:image:src" content="{{ .Site.BaseUrl }}{{ .Params.twitter.image }}"/>
+  {{ if .Params.twitter.image }}
+	<meta name="twitter:image:src" content="{{ .Site.BaseURL }}{{ .Params.twitter.image }}"/>
+  {{ end }}
 	<meta name="twitter:title" content="{{ .Title }}"/>
 	<meta name="twitter:description" content="{{ .Summary }}"/>
 	<meta name="twitter:site" content="@droneio"/>
 	<meta name="twitter:domain" content="https://twitter.com/droneio"/>
-	<meta name="twitter:creator" content="@bradrydzewski"/>
+	<meta name="twitter:creator" content="{{ .Params.twitter.author }}"/>
 {{ end }}
 
 </head>
