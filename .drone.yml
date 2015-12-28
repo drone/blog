@@ -9,7 +9,7 @@ build:
     - hugo -t drone
 
 publish:
-  s3_sync:native:
+  s3_sync:
     acl: public-read
     region: us-east-1
     bucket: blog.drone.io
@@ -18,7 +18,5 @@ publish:
     source: public/
     target: /
     delete: true
-    content_type:
-      ".svg": image/svg+xml
     when:
       branch: master
