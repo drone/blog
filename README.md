@@ -1,4 +1,4 @@
-[![Build Status](http://test.drone.io/api/badge/github.com/drone/blog/status.svg?style=flat)](http://test.drone.io/github.com/drone/blog) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/drone/drone?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build Status](http://beta.drone.io/api/badges/drone/blog/status.svg)](http://beta.drone.io/drone/blog) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/drone/drone?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Blog for the [Drone](https://github.com/drone/drone) continuous integration server, found at [blog.drone.io](http://blog.drone.io). We would love to start accepting guest blog posts, so if you are interested please send us a message on Gitter to discuss.
 
