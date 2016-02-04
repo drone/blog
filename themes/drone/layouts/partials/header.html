@@ -5,6 +5,10 @@
 	<title>{{ .Title }} &middot; Drone</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="{{ .Description }}">
+{{ if .RSSlink }}
+    <link href="{{ .RSSlink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+    <link href="{{ .RSSlink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+{{ end }}
 	<link id="favicon" rel="shortcut icon" href="/favicon.ico" />
 
 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
