@@ -2,7 +2,7 @@
 date = "2016-02-08T12:40:00-08:00"
 draft = false
 title = "Size Matters | The quest for a smaller Docker image"
-description = "Why we chose Drone for building docker images for our Phoenix/Elixir application"
+description = "Why we chose Drone for building Docker images for our Phoenix/Elixir application"
 
 [author]
   name = "Aaron Weiker"
@@ -13,34 +13,46 @@ description = "Why we chose Drone for building docker images for our Phoenix/Eli
   author = "@a_weiker"
 +++
 
-Two weeks ago I discovered Drone while I was in search of a better way of creating the Docker image that would run our application. I was on the lookout for a way to compile our Elixir/Phoenix application and then place only these binaries onto the docker image. To sum up, I had the following goals:
+Two weeks ago I started a journey to find a better way to have Docker images generated during the build process. It was then that I discovered [Drone](http://github.com/drone/drone). I was searching for a way to compile our [Phoenix](http://phoenixframework.org) application using [Exrm](https://exrm.readme.io/) and then place these binaries onto the Docker image. To sum up, I had the following goals:
 
-* Generated Docker image < 100MB, was 250MB
-* Fast startup time of image < 5 seconds
+* Generated Docker image <100MB
+* <5 second startup time
 
-The following is an attempt to walk you through the journey I took to create the [Drone with Elixir Demo](http://github.com/drone-demos/drone-with-elixir). If you are just looking for the details on how to build a Docker image for [Phoenix](http://phoenixframework.org), you can just straight to the [demo](http://github.com/drone-demos/drone-with-elixir) for the details.
+The following is an attempt to walk you through the journey I took to create the [Drone with Elixir Demo](http://github.com/drone-demos/drone-with-elixir). If you are just looking for the details on how to build a Docker image for [Phoenix](http://phoenixframework.org), you can jump straight to the [demo](http://github.com/drone-demos/drone-with-elixir) for the details.
 
-## [Keep it Simple, Stupid] (https://en.wikipedia.org/wiki/KISS_principle)
+My goal for the [demo](http://github.com/drone-demos/drone-with-elixir) was to find the correct way to run a [Phoenix](http://phoenixframework.org) application in production that is simple, secure, reliable, and fast. I wasn't comfortable with the running `mix phoenix.server` like [`bitwalker/alpine-elixir-phoenix`](https://github.com/bitwalker/alpine-elixir-phoenix) and thought that [`msaraiva/alpine-erlang`](https://github.com/msaraiva/alpine-erlang) was nice, but left you with just part of a solution. So this was my attempt at providing a more complete example.
 
-The more I looked into how Drone worked, the more I was drawn to the simple elegance of it. The ability to pick the exact Docker container that will run my build. With the introduction of this feature it took care of all of the following concerns:
+I do not include anything on how to deploy a Docker container. I needed to draw the line somewhere and get this written. So this demo will leave you with the container being published and relying on you to do the rest.
+
+While this isn't advisable for production but works for this scenario. Drone is [currently setup](http://beta.drone.io/drone-demos/drone-with-elixir) on the demo and will create a new container whenever a new build passes. Then I have [Watchtower](https://github.com/CenturyLinkLabs/watchtower) setup to keep http://drone-demo.weiker.org/ constantly up to date.
+
+## [Keep it Simple] (https://en.wikipedia.org/wiki/KISS_principle)
+
+The more I looked into how Drone worked, the more I was drawn to the simple elegance of it. Everything in Drone is orchestrated together using Docker containers. From fetching the code, compiling, even publishing was all based on isolated, stateless containers. By using an approach like this, we can get these guarantees:
 
 * Only the source code varies
 * Builds are isolated from one another
 * Updating dependencies is kept simple
 
-As an example, during the process of evaluating Drone there was a new version Elixir released. The evaluation of migration to this was as simple as updating the base image that was used. I have to admit that other build systems also try to solve this by allowing you to declare your dependencies and build environment. The difference with Drone is that I can be 100% confident how those dependencies are built and made available to me. In this case of Elixir, being built on top of Erlang and OTP, I can be confident that the feature set I need is made available. In fact, this is the exact [Dockerfile](https://github.com/aweiker/alpine-elixir/blob/master/1.2.1/Dockerfile) that I ended up using and you can see exactly what Erlang packages are installed.
+As an example, during the process of evaluating Drone there was a [new version of Elixir](https://github.com/elixir-lang/elixir/releases/tag/v1.2.2) released. The evaluation and migration to the new version was as simple as updating the base image.
+
+While other build systems also try to solve this by allowing you to declare your dependencies and build environment, the difference with Drone is how those dependencies are built and made available to me. Drone allows me to specify the image to use, and in doing so, I can be confident that the feature set I need is made available.
 
 ![Build Explained](/images/drone-with-elixir_build-explained.png)
 
-So far I have just been explaining how the _Fetch_, _Compile_, and _Test_ stages work of the build process. Where the real power and flexibility of Drone came into play for me was how I can take the artifacts created during the _Compile_ stage and package them up into a Docker image. Since we already established I can use a custom Docker image for compiling and testing, let's address the publish stage where I can generate a custom docker image. Since Elixir is a compiled language I need to be sure that I compile and test my code on the same platform/options that it will be deployed on. In my case, I have an Alpine Linux image that was setup to use for compiling the code and then a separate base image that is used for building the Docker image.
+So far I have just been discussing the _Fetch_, _Compile_, and _Test_ stages of the build process. Where the real power of Drone came into play for me was in the _Publish_ stage where I can take the output of the _Compile_ and create a Docker image.
 
 ## Less is More
 
-> _"But didn't you just say you wanted to use the same image in both places?"_
+At this point you may be wondering:
 
-I ~~lied~~ stretched the truth. You see, in order to build Phoenix application for release, you need to [use Node to prepare static resources](http://www.phoenixframework.org/docs/deployment#section-compiling-your-application-assets) and then use [Exrm](http://www.phoenixframework.org/docs/advanced-deployment) to generate the compiled BEAM bytecode.
+> _"Why can't I use the same base image for compiling and creating the production container?"_
 
-Remember how I said one of my goals was to create a small container. If I had gone the traditional route of running my application with `mix phoenix.server` I would have needed a larger container such as [bitwalker/alpine-elixir-phoenix](https://github.com/bitwalker/alpine-elixir-phoenix) which starts at 272.6 MB. For reference, here are the sizes of the docker images on my machine when running `docker images`.
+Let's be clear, _you can_. ~~If~~ When you [read the documentation](http://www.phoenixframework.org/docs/deployment#section-starting-your-server-in-production) on how to run Phoenix in production, it will tell you to use `MIX_ENV=prod mix phoenix.server`. In fact, this is actually how the popular [`bitwalker/alpine-elixir-phoenix`](https://github.com/bitwalker/alpine-elixir-phoenix) image is built which runs at 272.6 MB. But remember about my goal of having a small container (< 100MB), if I want to accomplish that I need to be ~~obsessive~~ intentional about what is added.
+
+To reach this goal, I went searching for another way. This is when I came across [Exrm](http://www.phoenixframework.org/docs/advanced-deployment) and [these instructions](http://www.phoenixframework.org/docs/deployment#section-compiling-your-application-assets). This allows me to use a base image that only has Erlang on it and copy the compiled BEAM bytecode to the container.
+
+To give you a sense at how small of image we can start with and what can happen if you aren't paying attention, refer to the output when I ran `docker images` on my server. I ordered sizes starting the smallest to the largest.
 
 ```
 REPOSITORY                       TAG       IMAGE ID       CREATED       SIZE
@@ -57,9 +69,14 @@ nginx                            latest    99e9abbaeceb   11 days ago   134.5 MB
 bitwalker/alpine-elixir-phoenix  2.0       be6ba4879714   3 weeks ago   272.6 MB
 ```
 
-As you can see from this list, the production image `dronedemos/drone-with-elixir` is only 54.32 MB. This is significantly smaller that the image that was required to compile our code.
+As you can see from this list, the _production_ image `dronedemos/drone-with-elixir` is only 54.32 MB. This is significantly smaller that the image that we used to compile our code which is the `bitwalker/alpine-elixir-phoenix:2.0`. Still way larger than what we started with of 4.794 MB, but we have the power of Erlang at our fingertips now.
 
-If you remember, when Drone does the build it will do so in whatever container image is specified. In order to get the source code on this image, what Drone does is side mount the source code into the container. The source code itself is actually fetched using the [`plugins/drone-git`](http://readme.drone.io/plugins/git/) container. For more information on how this works and how the entire plugin system work, refer to the [documentation](http://readme.drone.io/devs/plugins/). The following visualization may help you understand how this works.
+## Creation
+
+At this point you might be wondering how the compiled output is moved from one container to the next. (At least I was.) In order to get the source code on this image, Drone will side mount the Drone workspace on the container.
+
+> Drone is designed around a [plugin](http://readme.drone.io/devs/plugins/) architecture. For example, the source code itself is fetched using the [`plugins/drone-git`](http://readme.drone.io/plugins/git/) container. The following visualization may help you visualize how this works.
+
 ![Drone Workspaces](/images/drone-with-elixir_containers.png)
 
 ## Parting Thoughts
