@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="{{ .Site.Params.description }}">
+	<meta name="author" content="{{ .Site.Params.author }}"> 
+	<title>{{ .Site.Title }}</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="shortcut icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="shortcut icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link href="/reset.css" rel="stylesheet">
+	<link href="/style.css" rel="stylesheet">
+	{{- if ne .Site.HomeAbsURL "http://localhost:1313/" }}
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-KVGGDZ7');</script>
+	<!-- End Google Tag Manager -->
+	{{ end }}
+</head>
+<body
+	data-site-id="{{ .Site.Title | urlize }}"
+	data-page-id="{{ .Page.UniqueID }}"
+	data-page-kind="{{ .Page.Kind }}"
+	data-page-file="{{ .Page.File.TranslationBaseName }}"
+	data-page-dir="{{ .Page.Dir }}">
+
+	{{- if ne .Site.HomeAbsURL "http://localhost:1313/" }}
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVGGDZ7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	{{ end }}
+	
+
+	<header>
+		<div>
+			<div class="logo">
+				<a href="/">
+					<svg width="26px" height="26px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+						<!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+						<title>drone-logo-vector-dark</title>
+						<desc>Created with Sketch.</desc>
+						<g id="Landing" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<g id="logos" transform="translate(-50.000000, -50.000000)" fill="#1E375A">
+								<path d="M90.2882214,69.3797473 L89.4295832,70.2383855 L124.476463,105.285265 C119.520903,113.022443 116.666667,122.524707 116.666667,133.333333 C116.666667,163.38141 138.72549,183.333333 166.666667,183.333333 C177.107498,183.333333 186.726972,180.547433 194.681066,175.489868 L229.90668,210.715482 C211.655003,234.822389 182.652657,250 150,250 C94.7802198,250 50,206.593407 50,150 C50,116.344376 65.8368878,87.3523756 90.2882214,69.3797473 Z M106.958511,59.4830419 C119.995354,53.3798856 134.591235,50 150,50 C205.21978,50 250,93.4065934 250,150 C250,165.565882 246.612323,180.134166 240.551518,193.076049 L208.85687,161.381401 C213.81243,153.644224 216.666667,144.14196 216.666667,133.333333 C216.666667,103.285256 194.607843,83.3333333 166.666667,83.3333333 C156.225835,83.3333333 146.606361,86.1192334 138.652268,91.1767986 L106.958511,59.4830419 Z M166.666667,163.333333 C149.901961,163.333333 136.666667,151.362179 136.666667,133.333333 C136.666667,115.304487 149.901961,103.333333 166.666667,103.333333 C183.431373,103.333333 196.666667,115.304487 196.666667,133.333333 C196.666667,151.362179 183.431373,163.333333 166.666667,163.333333 Z" id="drone-logo-vector-dark"></path>
+							</g>
+						</g>
+					</svg>
+				</a>
+			</div>
+			<ul>
+				<li>
+					<a href="https://drone.io/enterprise">Enterprise</a>
+				</li>
+				<li>
+					<a href="https://github.com/drone">Community</a>
+				</li>
+				<li>
+					<a href="http://docs.drone.io">Documentation</a>
+				</li>
+				<li>
+					<a href="https://drone.io" target="_blank" class="goto">
+						Learn More
+						<svg style="width:24px;height:24px;margin-left:12px;transform:rotate(180deg);" viewBox="0 0 24 24">
+							<path fill="#000000" d="M21,11H6.83L10.41,7.41L9,6L3,12L9,18L10.41,16.58L6.83,13H21V11Z"></path>
+						</svg>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</header>
+	<aside>
+		<div>
+			<ul>
+				<li>Categories</li>
+				{{ range .Site.Menus.tags }}
+				<li>
+					<a href="{{ .URL }}">{{ .Name }}</a>
+				</li>
+				{{ end }}
+			</ul>
+		</div>
+	</aside>
+	{{ range $i, $e := first 1 .Data.Pages }}
+	<main>
+		<article>
+			<header>
+				<h1>{{ .Title }}</h1>
+				<div>
+					<address>
+						<a rel="author" href="https://twitter.com/{{ .Params.author }}" target="_blank">
+							{{ .Params.author }}
+						</a>
+					</address> 
+					<time>{{ dateFormat "January 2, 2006" .Date }}</time>
+				</div>
+			</header>
+			{{ if .Params.image }}
+			<img src="{{ .Params.image }}" data-path="{{ .Params.image }}" />
+			{{ end }}
+			<div>
+				{{ .Content }}
+			</div>
+		</article>
+	</main>
+	{{ end }}
+	<footer>
+		<div>
+			<section>
+				{{ .Site.Copyright }}
+			</section>
+			<section>
+				<h3>Company</h3>
+					<ul>
+						<li>
+							<a href="https://blog.drone.io" target="_blank">Blog</a>
+						</li>
+						<li>
+							<a href="https://github.com/drone/brand">Branding</a>
+						</li>
+						<li>
+							<a href="mailto:hello@drone.io" target="_blank">Contact</a>
+						</li>
+					</ul>
+			</section>
+			<section>
+				<h3>Community</h3>
+				<ul>
+					<li>
+						<a href="https://github.com/drone" target="_blank">
+							<svg aria-labelledby="simpleicons-github-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-github-icon">GitHub icon</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+							GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://twitter.com/droneio" target="_blank">
+							<svg aria-labelledby="simpleicons-twitter-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-twitter-icon">Twitter icon</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"></path></svg>
+							Twitter
+						</a>
+					</li>
+					<li>
+						<a href="https://discourse.drone.io/" target="_blank">
+							<svg aria-labelledby="simpleicons-discourse-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-discourse-icon">Discourse icon</title><path d="M12.103 0C18.666 0 24 5.485 24 11.997c0 6.51-5.33 11.99-11.9 11.99L0 24V11.79C0 5.28 5.532 0 12.103 0zm.116 4.563c-2.593-.003-4.996 1.352-6.337 3.57-1.33 2.208-1.387 4.957-.148 7.22L4.4 19.61l4.794-1.074c2.745 1.225 5.965.676 8.136-1.39 2.17-2.054 2.86-5.228 1.737-7.997-1.135-2.778-3.84-4.59-6.84-4.585h-.008z"></path></svg>
+							Discourse
+						</a>
+					</li>
+					<li>
+						<a href="https://dronesupport.slack.com/" target="_blank">
+							<svg aria-labelledby="simpleicons-slack-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-slack-icon">Slack icon</title><path d="M9.879 10.995l1.035 3.085 3.205-1.074-1.035-3.074-3.205 1.08v-.017z"></path><path d="M18.824 14.055l-1.555.521.54 1.61c.218.65-.135 1.355-.786 1.574-.15.045-.285.067-.435.063-.511-.015-.976-.338-1.155-.849l-.54-1.607-3.21 1.073.539 1.608c.211.652-.135 1.358-.794 1.575-.15.048-.285.067-.435.064-.51-.015-.976-.34-1.156-.85l-.539-1.619-1.561.524c-.15.045-.285.061-.435.061-.511-.016-.976-.345-1.155-.855-.225-.66.135-1.364.78-1.575l1.56-.525L7.5 11.76l-1.551.525c-.141.048-.285.066-.428.064-.495-.016-.975-.338-1.141-.848-.209-.65.135-1.354.796-1.574l1.56-.52-.54-1.605c-.21-.654.136-1.359.796-1.575.659-.22 1.363.136 1.574.783l.539 1.608L12.3 7.544l-.54-1.605c-.209-.645.135-1.35.789-1.574.652-.211 1.359.135 1.575.791l.54 1.621 1.555-.51c.651-.219 1.356.135 1.575.779.218.654-.135 1.359-.784 1.575l-1.557.524 1.035 3.086 1.551-.516c.652-.211 1.358.135 1.575.795.22.66-.135 1.365-.779 1.574l-.011-.029zm4.171-5.356C20.52.456 16.946-1.471 8.699 1.005.456 3.479-1.471 7.051 1.005 15.301c2.475 8.245 6.046 10.17 14.296 7.694 8.245-2.475 10.17-6.046 7.694-14.296z"></path></svg>
+							Slack
+						</a>
+					</li>
+				</ul>
+			</section>
+		</div>
+	</footer>
+</body>
+</html>

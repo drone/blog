@@ -1,0 +1,58 @@
+baseurl: https://blog.drone.io
+title: Drone Blog
+theme: default
+
+params:
+  description: "Drone is modern CI/CD. Container-native and available via open source and an enterprise on-prem edition. Try it today."
+  author: "Brad Rydzewski"
+
+taxonomies:
+  tag: tags
+
+copyright: Copyright © 2020 Drone.IO Inc.
+
+googleAnalytics: "UA-34247933-3"
+
+pygmentsUseClasses: true
+pygmentsCodefences: true
+
+markup:
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+    parser:
+      attribute: true
+      autoHeadingID: true
+      autoHeadingIDType: github
+    renderer:
+      unsafe: true
+
+menu:
+  tags:
+    - Name: Announcements
+      Identifier: Announcements
+      URL: /tags/announcements/
+      Weight: 1
+    - Name: Product Updates
+      Identifier: Product Updates
+      URL: /tags/product-updates/
+      Weight: 2
+    - Name: Community
+      Identifier: Community
+      URL: /tags/community/
+      Weight: 3
+    - Name: Interviews
+      Identifier: Interviews
+      URL: /tags/interviews/
+      Weight: 4
+    # - Name: Tutorials
+    #   Identifier: "tutorials"
+    #   URL: /tags/tutorials/
+    #   Weight: 3
+
